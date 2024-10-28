@@ -1,5 +1,5 @@
 import 'package:app_penjualan_elektronik/definitions/cartModel.dart';
-import 'package:app_penjualan_elektronik/pages/transactionPages/transaction.dart';
+import 'package:app_penjualan_elektronik/pages/transactionPages/detail_pembayaran.dart';
 import 'package:app_penjualan_elektronik/providers/cart_provider.dart';
 import 'package:app_penjualan_elektronik/providers/user_provider.dart';
 import 'package:app_penjualan_elektronik/utils/fontsFactory.dart';

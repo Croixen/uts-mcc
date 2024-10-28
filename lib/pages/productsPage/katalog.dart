@@ -257,6 +257,25 @@ class _Katalog extends State<Katalog> {
                                     ),
                                     Text(
                                         "Harga: ${formatCurrency(product['price'])}"),
+                                    Chip(
+                                        label: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          size: 15,
+                                          color: Colors.yellow.shade700,
+                                        ),
+                                        const SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          double.parse(
+                                                  product['rating'].toString())
+                                              .toString(),
+                                          style: const TextStyle(fontSize: 12),
+                                        )
+                                      ],
+                                    ))
                                   ],
                                 ),
                                 Expanded(
@@ -373,6 +392,25 @@ class _Katalog extends State<Katalog> {
                                   ),
                                   Text(
                                       "Harga: ${formatCurrency(product['price'])}"),
+                                  Chip(
+                                      label: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        size: 15,
+                                        color: Colors.yellow.shade700,
+                                      ),
+                                      const SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        double.parse(
+                                                product['rating'].toString())
+                                            .toString(),
+                                        style: const TextStyle(fontSize: 12),
+                                      )
+                                    ],
+                                  ))
                                 ],
                               ),
                               Expanded(

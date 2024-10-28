@@ -125,211 +125,215 @@ class _HistoryDetail extends State<HistoryDetail> {
             },
             icon: const Icon(Icons.arrow_back),
           )),
-      body: Container(
-        margin: const EdgeInsets.all(8),
-        child: Column(children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1),
-                borderRadius: BorderRadius.circular(10)),
-            height: MediaQuery.of(context).size.height * 0.20,
-            margin: const EdgeInsets.all(3),
-            child: ListView.builder(
-              itemCount: history.length,
-              itemBuilder: (context, index) {
-                final Sales item = history[index];
-                return Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Card(
-                      color: Colors.white,
-                      elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Image.network(
-                                item.product.image,
-                                fit: BoxFit.fill,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          child: Column(children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 1),
+                  borderRadius: BorderRadius.circular(10)),
+              margin: const EdgeInsets.all(3),
+              height: MediaQuery.of(context).size.height * 0.25,
+              child: ListView.builder(
+                itemCount: history.length,
+                itemBuilder: (context, index) {
+                  final Sales item = history[index];
+                  return Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Image.network(
+                                  item.product.image,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item.product.namaProduk,
-                                    overflow: TextOverflow.fade,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    "${item.amount} x ${formatCurrency(item.product.price)}",
-                                    overflow: TextOverflow.fade,
-                                    style: const TextStyle(
-                                        color: Color.fromARGB(136, 61, 61, 61),
-                                        fontSize: 12),
-                                  ),
-                                  const Divider(
-                                    color: Colors.black,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            "Total Harga:",
-                                            overflow: TextOverflow.fade,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 11),
-                                          ),
-                                          Text(
-                                            formatCurrency(item.product.price *
-                                                item.amount),
-                                            overflow: TextOverflow.fade,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                      IconButton(
-                                          onPressed: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return ProductDetail(
-                                                  product: item.product);
-                                            }));
-                                          },
-                                          icon: const Icon(
-                                              Icons.description_outlined))
-                                    ],
-                                  ),
-                                ],
+                              const SizedBox(
+                                width: 5,
                               ),
-                            )
-                          ],
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.product.namaProduk,
+                                      overflow: TextOverflow.fade,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                    Text(
+                                      "${item.amount} x ${formatCurrency(item.product.price)}",
+                                      overflow: TextOverflow.fade,
+                                      style: const TextStyle(
+                                          color:
+                                              Color.fromARGB(136, 61, 61, 61),
+                                          fontSize: 12),
+                                    ),
+                                    const Divider(
+                                      color: Colors.black,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              "Total Harga:",
+                                              overflow: TextOverflow.fade,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11),
+                                            ),
+                                            Text(
+                                              formatCurrency(
+                                                  item.product.price *
+                                                      item.amount),
+                                              overflow: TextOverflow.fade,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return ProductDetail(
+                                                    product: item.product);
+                                              }));
+                                            },
+                                            icon: const Icon(
+                                                Icons.description_outlined))
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ));
-              },
+                      ));
+                },
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Container(
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 1),
-                  borderRadius: BorderRadius.circular(5)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Info Transaksi',
-                    style:
-                        googleFont(fontsize: 14, fontweight: FontWeight.bold),
-                  ),
-                  const Divider(),
-                  Row(
-                    children: [
-                      const Text(
-                        'ID Transaksi: \t',
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Color.fromARGB(255, 78, 78, 78)),
-                      ),
-                      Text(
-                        widget.transactionId,
-                        overflow: TextOverflow.fade,
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 12),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        'Tanggal Transaksi: \t',
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Color.fromARGB(255, 78, 78, 78)),
-                      ),
-                      Text(
-                        "${date.year}-${date.month}-${date.day}, ${date.hour}:${date.minute}",
-                        overflow: TextOverflow.fade,
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 12),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        'Nominal Transaksi: \t',
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Color.fromARGB(255, 78, 78, 78)),
-                      ),
-                      Text(
-                        formatCurrency(history[0].total),
-                        overflow: TextOverflow.fade,
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 12),
-                      )
-                    ],
-                  )
-                ],
-              )),
-          const SizedBox(
-            height: 15,
-          ),
-          Container(
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 1),
-                  borderRadius: BorderRadius.circular(5)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Detail Pengiriman',
-                    style:
-                        googleFont(fontsize: 14, fontweight: FontWeight.bold),
-                  ),
-                  const Divider(),
-                  Text(history[0].alamat)
-                ],
-              ))
-        ]),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+                padding: const EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 1),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Info Transaksi',
+                      style:
+                          googleFont(fontsize: 14, fontweight: FontWeight.bold),
+                    ),
+                    const Divider(),
+                    Row(
+                      children: [
+                        const Text(
+                          'ID Transaksi: \t',
+                          overflow: TextOverflow.fade,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 78, 78, 78)),
+                        ),
+                        Text(
+                          widget.transactionId,
+                          overflow: TextOverflow.fade,
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 12),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Tanggal Transaksi: \t',
+                          overflow: TextOverflow.fade,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 78, 78, 78)),
+                        ),
+                        Text(
+                          "${date.year}-${date.month}-${date.day}, ${date.hour}:${date.minute}",
+                          overflow: TextOverflow.fade,
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 12),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Nominal Transaksi: \t',
+                          overflow: TextOverflow.fade,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 78, 78, 78)),
+                        ),
+                        Text(
+                          formatCurrency(history[0].total),
+                          overflow: TextOverflow.fade,
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 12),
+                        )
+                      ],
+                    )
+                  ],
+                )),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+                padding: const EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 1),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Detail Pengiriman',
+                      style:
+                          googleFont(fontsize: 14, fontweight: FontWeight.bold),
+                    ),
+                    const Divider(),
+                    Text(history[0].alamat)
+                  ],
+                ))
+          ]),
+        ),
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(

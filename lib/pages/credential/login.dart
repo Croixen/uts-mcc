@@ -151,12 +151,12 @@ class _LoginScreen extends State<LoginScreen> {
                           decoration: const InputDecoration(
                               label: Text('Email'), icon: Icon(Icons.email)),
                           validator: (value) {
-                            // if (value == null || value.isEmpty) {
-                            //   return "Email Tidak Boleh Kosong!";
-                            // } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
-                            //     .hasMatch(value)) {
-                            //   return "Masukkan Email yang Valid!";
-                            // }
+                            if (value == null || value.isEmpty) {
+                              return "Email Tidak Boleh Kosong!";
+                            } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                                .hasMatch(value)) {
+                              return "Masukkan Email yang Valid!";
+                            }
                             return null;
                           },
                         ),
@@ -168,9 +168,9 @@ class _LoginScreen extends State<LoginScreen> {
                             password = value!;
                           },
                           validator: (value) {
-                            // if (value == null || value.isEmpty) {
-                            //   return "Password Tidak Boleh Kosong!";
-                            // }
+                            if (value == null || value.isEmpty) {
+                              return "Password Tidak Boleh Kosong!";
+                            }
                             return null;
                           },
                           obscureText: !_showPassword,

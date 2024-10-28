@@ -1,5 +1,6 @@
 import 'package:app_penjualan_elektronik/definitions/cartModel.dart';
 import 'package:app_penjualan_elektronik/definitions/users.dart';
+import 'package:app_penjualan_elektronik/pages/transactionPages/pembayaran_berhasil.dart';
 import 'package:app_penjualan_elektronik/providers/cart_provider.dart';
 import 'package:app_penjualan_elektronik/providers/user_provider.dart';
 import 'package:app_penjualan_elektronik/utils/fontsFactory.dart';
@@ -35,7 +36,6 @@ class _Payment extends State<Payment> {
     try {
       final UserCreds user =
           Provider.of<Userproviders>(context, listen: false).user;
-      print(user.alamat);
       final response = await Supabase.instance.client
           .from('transactions')
           .insert({
@@ -43,7 +43,7 @@ class _Payment extends State<Payment> {
             'userId': user.uuid,
             'alamat': user.alamat!
           })
-          .select('transactionId')
+          .select('transactionId, transaction_date, total')
           .single();
 
       if (response.isEmpty) {
@@ -76,25 +76,11 @@ class _Payment extends State<Payment> {
 
         if (mounted) {
           Navigator.pop(context);
-          showDialog(
-              context: context,
-              builder: (context) {
-                return SingleChildScrollView(
-                  child: AlertDialog(
-                    title: const Text('Pemberitahuan'),
-                    content: const Text('Transaksi Berhasil Dilakukan!'),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            context.read<CartProvider>().clearCartSum();
-                            Navigator.popUntil(
-                                context, ModalRoute.withName('home'));
-                          },
-                          child: const Text('Tutup'))
-                    ],
-                  ),
-                );
-              });
+          Navigator.pop(context);
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => PembayaranBerhasil(
+                    resultPembyaran: response,
+                  )));
         }
       }
     } catch (e) {
@@ -399,7 +385,7 @@ class _Payment extends State<Payment> {
                   });
             },
             child: Container(
-              margin: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+              margin: const EdgeInsets.fromLTRB(20, 5, 20, 10),
               height: 60,
               child: const Card(
                 elevation: 3,
@@ -412,6 +398,77 @@ class _Payment extends State<Payment> {
                         thickness: 1,
                       ),
                       Text('Via QRIS')
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      padding: const EdgeInsets.fromLTRB(5, 20, 5, 5),
+                      height: 300,
+                      child: Column(
+                        children: [
+                          const Center(
+                            child: Text(
+                              'Mohon ke Kasir',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Divider(
+                              color: Colors.black,
+                              thickness: 2,
+                            ),
+                          ),
+                          const Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    elevation: WidgetStatePropertyAll(10),
+                                    backgroundColor:
+                                        WidgetStatePropertyAll(Colors.green),
+                                    fixedSize:
+                                        WidgetStatePropertyAll(Size(250, 50))),
+                                onPressed: () {
+                                  handleTransaction();
+                                },
+                                child: const Text(
+                                  'Konfirmasi',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          )
+                        ],
+                      ),
+                    );
+                  });
+            },
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+              height: 60,
+              child: const Card(
+                elevation: 3,
+                child: Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.wallet),
+                      VerticalDivider(
+                        thickness: 1,
+                      ),
+                      Text('Tunai')
                     ],
                   ),
                 ),
